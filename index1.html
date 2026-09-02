@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArmanTrade · date broker · palm & scroll</title>
+  <!-- Google Font & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f1f0e;
+      color: #f0eadb;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== PALM SCENE ===== */
+    .palm-scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 30% 40%, #1c3a1a, #091108);
+    }
+
+    /* palm trunk (simple) */
+    .trunk {
+      position: absolute;
+      bottom: 0;
+      left: 12%;
+      width: 28px;
+      height: 70%;
+      background: linear-gradient(135deg, #3d2c1b, #1f150a);
+      border-radius: 40px 40px 0 0;
+      transform: rotate(4deg);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      z-index: 1;
+    }
+    .trunk::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -8px;
+      width: 44px;
+      height: 30px;
+      background: #2d1f10;
+      border-radius: 60% 60% 0 0;
+      opacity: 0.3;
+    }
+
+    /* ===== LEAVES (move by scroll) ===== */
+    .leaf {
+      position: absolute;
+      transform-origin: bottom center;
+      will-change: transform;
+      z-index: 2;
+      opacity: 0.7;
+      transition: transform 0.1s ease-out;
+    }
+    .leaf img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    }
+
+    /* individual leaf positions & sizes (emojis as leaves) */
+    .leaf1 { bottom: 60%; left: 6%; width: 120px; transform: rotate(-20deg); }
+    .leaf2 { bottom: 70%; left: 14%; width: 140px; transform: rotate(10deg); }
+    .leaf3 { bottom: 55%; left: 20%; width: 110px; transform: rotate(-5deg); }
+    .leaf4 { bottom: 75%; left: 2%; width: 100px; transform: rotate(-35deg); }
+    .leaf5 { bottom: 65%; left: 24%; width: 130px; transform: rotate(20deg); }
+    .leaf6 { bottom: 45%; left: 8%; width: 100px; transform: rotate(-15deg); }
+    .leaf7 { bottom: 80%; left: 10%; width: 90px; transform: rotate(5deg); }
+
+    /* ===== DATES that drop while scrolling ===== */
+    .date-drop {
+      position: absolute;
+      z-index: 3;
+      font-size: 2.4rem;
+      pointer-events: none;
+      will-change: transform, opacity;
+      opacity: 0;
+      transition: none;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+      transform: translateY(-40px) scale(0.6);
+    }
+    /* each date will be animated via JS */
+
+    /* small ground dates (already fallen) */
+    .ground-dates {
+      position: absolute;
+      bottom: 2%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      font-size: 2rem;
+      letter-spacing: 1.2rem;
+      opacity: 0.15;
+      z-index: 1;
+      pointer-events: none;
+      flex-wrap: wrap;
+      padding: 0 10%;
+      color: #9b7e4b;
+      text-shadow: 0 2px 8px #0f1f0e;
+    }
+
+    /* ===== CONTENT ===== */
+    .content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.8rem 4rem;
+      backdrop-filter: blur(1.2px);
+      min-height: 200vh; /* enough to scroll */
+    }
+
+    /* smooth fade-in on scroll (reveal) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* header */
+    .brand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0 1.8rem;
+      border-bottom: 1px solid rgba(210, 185, 120, 0.2);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo h1 {
+      font-weight: 700;
+      font-size: 2.6rem;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #f5e7b0, #dbb87a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo span {
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: #b8af8a;
+      display: block;
+      -webkit-text-fill-color: #b8af8a;
+      background: none;
+    }
+    .tagline {
+      background: rgba(25, 45, 22, 0.6);
+      padding: 0.4rem 1.4rem;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(210, 185, 120, 0.15);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: #ddd0b0;
+    }
+    .tagline i { margin-right: 6px; color: #dbb87a; }
+
+    .hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 3.4rem;
+      font-weight: 600;
+      color: #f2ebd5;
+      line-height: 1.2;
+    }
+    .hero h2 i { color: #e6c87c; margin: 0 0.3rem; }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 650px;
+      margin: 1.5rem auto 2.2rem;
+      color: #d4cbb2;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .btn {
+      padding: 0.8rem 2.2rem;
+      border-radius: 50px;
+      background: rgba(20, 35, 18, 0.5);
+      border: 1px solid #b8a77a;
+      color: #efeae1;
+      font-weight: 500;
+      font-size: 1rem;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: #dbb87a;
+      border-color: #dbb87a;
+      color: #131f12;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(200, 160, 70, 0.2);
+    }
+    .btn-primary:hover {
+      background: #e9ca8c;
+      transform: scale(1.02);
+    }
+    .btn-outline:hover {
+      background: rgba(220, 190, 130, 0.1);
+      border-color: #dbb87a;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 2rem;
+      margin: 3.5rem 0 4rem;
+    }
+    .card {
+      background: rgba(20, 35, 20, 0.5);
+      backdrop-filter: blur(6px);
+      padding: 2rem 1.5rem;
+      border-radius: 28px;
+      border: 1px solid rgba(200, 180, 120, 0.1);
+      text-align: center;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 30px -12px rgba(0,0,0,0.6);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200, 180, 120, 0.3);
+      background: rgba(30, 50, 28, 0.6);
+    }
+    .card i {
+      font-size: 2.8rem;
+      color: #e0c87c;
+      margin-bottom: 0.8rem;
+    }
+    .card h3 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+      color: #f2e7cf;
+    }
+    .card p {
+      font-weight: 300;
+      color: #ccc2a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .broker-message {
+      background: rgba(15, 30, 16, 0.5);
+      backdrop-filter: blur(4px);
+      padding: 2.5rem 2rem;
+      border-radius: 40px;
+      border-left: 4px solid #dbb87a;
+      margin: 1rem 0 3rem;
+      text-align: center;
+    }
+    .broker-message blockquote {
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #eee3ca;
+    }
+    .broker-message cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-style: normal;
+      font-weight: 400;
+      color: #dbb87a;
+    }
+
+    .footer {
+      width: 100%;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(200, 180, 120, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #b7ab89;
+    }
+    .footer i { color: #dbb87a; margin: 0 4px; }
+    .footer-links a {
+      color: #cfc3a4;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #e6d6aa; }
+
+    @media (max-width: 700px) {
+      .logo h1 { font-size: 2rem; }
+      .hero h2 { font-size: 2.4rem; }
+      .brand-header { flex-direction: column; align-items: start; }
+      .footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .footer-links a { margin-left: 0; margin-right: 1.2rem; }
+      .leaf { display: none; } /* hide leaves on small screens, keep trunk */
+      .leaf1, .leaf2, .leaf3, .leaf4, .leaf5, .leaf6, .leaf7 { display: none; }
+      .trunk { left: 4%; width: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PALM SCENE -->
+<div class="palm-scene" id="palmScene">
+  <div class="trunk"></div>
+
+  <!-- leaves (using emoji as palm leaves, scaled) -->
+  <div class="leaf leaf1"><span style="font-size:3.2rem; display:block;">🌿</span></div>
+  <div class="leaf leaf2"><span style="font-size:3.8rem; display:block;">🌴</span></div>
+  <div class="leaf leaf3"><span style="font-size:3.0rem; display:block;">🌿</span></div>
+  <div class="leaf leaf4"><span style="font-size:2.8rem; display:block;">🌿</span></div>
+  <div class="leaf leaf5"><span style="font-size:3.6rem; display:block;">🌴</span></div>
+  <div class="leaf leaf6"><span style="font-size:2.8rem; display:block;">🌿</span></div>
+  <div class="leaf leaf7"><span style="font-size:2.6rem; display:block;">🌿</span></div>
+
+  <!-- dates that will be spawned by JS -->
+  <div id="dateContainer"></div>
+
+  <!-- ground dates -->
+  <div class="ground-dates">
+    <span>🌴</span> <span>🌴</span> <span>🌴</span> <span>🌴</span> <span>🌴</span> 
+    <span>🌴</span> <span>🌴</span> <span>🌴</span> <span>🌴</span> <span>🌴</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+  <header class="brand-header reveal">
+    <div class="logo">
+      <h1>🌴 ArmanTrade</h1>
+      <span>premium date broker</span>
+    </div>
+    <div class="tagline"><i class="fas fa-seedling"></i> since 2012 · global sourcing</div>
+  </header>
+
+  <section class="hero reveal">
+    <h2> <i class="fas fa-handshake"></i>  dates & trust  <i class="fas fa-leaf"></i> </h2>
+    <p>ArmanTrade connects premium date growers with international buyers. Transparent, sustainable, and remarkably smooth — just like our dates.</p>
+    <div class="btn-group">
+      <a href="#" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Explore catalog</a>
+      <a href="#" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Contact broker</a>
+    </div>
+  </section>
+
+  <div class="features reveal">
+    <div class="card"><i class="fas fa-warehouse"></i><h3>Direct sourcing</h3><p>From farm to table, over 40 partner farms across MENA.</p></div>
+    <div class="card"><i class="fas fa-award"></i><h3>Quality graded</h3><p>Medjool, Deglet, Barhi — inspected under ISO standards.</p></div>
+    <div class="card"><i class="fas fa-ship"></i><h3>Logistics</h3><p>Temperature-controlled shipping, real-time tracking.</p></div>
+  </div>
+
+  <div class="broker-message reveal">
+    <blockquote>“We don’t just trade dates — we cultivate relationships. Every order is handled with the same care as a date palm.”</blockquote>
+    <cite>— Arman, founder & head broker</cite>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; gap:1.5rem; margin:1rem 0 2rem;" class="reveal">
+    <div style="background:rgba(20,35,18,0.4); padding:0.8rem 2rem; border-radius:60px; backdrop-filter:blur(3px); border:1px solid rgba(200,180,120,0.1);">
+      <span style="font-weight:600; font-size:1.4rem; color:#e6d6aa;">+420</span>
+      <span style="margin-left:8px; color:#c8bc9a;">tons delivered 2025</span>
+    </div>
+    <div style="background:rgba(20,35,18,0.4); padding:0.8rem 2rem; border-radius:60px; backdrop-filter:blur(3px); border:1px solid rgba(200,180,120,0.1);">
+      <span style="font-weight:600; font-size:1.4rem; color:#e6d6aa;">18</span>
+      <span style="margin-left:8px; color:#c8bc9a;">countries served</span>
+    </div>
+    <div style="background:rgba(20,35,18,0.4); padding:0.8rem 2rem; border-radius:60px; backdrop-filter:blur(3px); border:1px solid rgba(200,180,120,0.1);">
+      <span style="font-weight:600; font-size:1.4rem; color:#e6d6aa;">4.9★</span>
+      <span style="margin-left:8px; color:#c8bc9a;">buyer satisfaction</span>
+    </div>
+  </div>
+
+  <footer class="footer reveal">
+    <div><i class="fas fa-tree"></i> ArmanTrade · date broker <span style="margin:0 8px; color:#5f6b4b;">|</span> <i class="fas fa-envelope"></i> trade@armandate.com</div>
+    <div class="footer-links">
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+      <a href="#"><i class="fas fa-scroll"></i> Brochure</a>
+    </div>
+  </footer>
+  <div style="width:100%; text-align:center; margin-top:1.2rem; font-size:0.75rem; color:#5f6b4b; letter-spacing:1px;">
+    <i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; color:#b8a77a;"></i> scroll · leaves move · dates drop
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ----- LEAF MOTION (by scroll) -----
+    const leaves = document.querySelectorAll('.leaf');
+    const scene = document.getElementById('palmScene');
+    let lastScrollY = window.scrollY;
+
+    function updateLeaves(scrollY) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(scrollY / maxScroll, 1); // 0 -> 1
+
+      leaves.forEach((leaf, index) => {
+        // each leaf moves differently: rotation + slight translation
+        const baseRot = parseFloat(leaf.dataset.baseRot) || 0;
+        const rotOffset = (index * 6) % 30 - 10; // varied
+        const rot = baseRot + (progress * 25 * (index % 2 === 0 ? 1 : -1)) + rotOffset * 0.5;
+        const transX = progress * 20 * (index % 2 === 0 ? 1 : -1) * 0.4;
+        const transY = progress * -10 * (index % 3 === 0 ? 0.5 : 0.8);
+        leaf.style.transform = `rotate(${rot}deg) translate(${transX}px, ${transY}px)`;
+      });
+    }
+
+    // store initial rotation as base
+    leaves.forEach(leaf => {
+      const style = window.getComputedStyle(leaf);
+      const transform = style.transform;
+      if (transform && transform !== 'none') {
+        // try to extract rotation
+        const matrix = transform.match(/matrix\((.+)\)/);
+        if (matrix) {
+          const values = matrix[1].split(', ').map(Number);
+          if (values.length === 6) {
+            const angle = Math.atan2(values[1], values[0]) * (180 / Math.PI);
+            leaf.dataset.baseRot = angle;
+          }
+        }
+      } else {
+        // fallback: from inline or default
+        const rotMatch = leaf.style.transform.match(/rotate\(([-\d.]+)deg\)/);
+        if (rotMatch) {
+          leaf.dataset.baseRot = parseFloat(rotMatch[1]);
+        } else {
+          leaf.dataset.baseRot = 0;
+        }
+      }
+    });
+
+    // initial update
+    updateLeaves(window.scrollY);
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      updateLeaves(scrollY);
+      // dates drop trigger based on scroll
+      spawnDatesOnScroll(scrollY);
+      lastScrollY = scrollY;
+    });
+
+    // ----- DATE DROP (spawn on scroll) -----
+    const dateContainer = document.getElementById('dateContainer');
+    const dateEmojis = ['🌴', '🌴', '🌴', '🌴', '🌴', '🌴', '🌴', '🌴']; 
+    let lastSpawnScroll = 0;
+    const spawnInterval = 180; // scroll px between spawns
+
+    function spawnDatesOnScroll(scrollY) {
+      if (scrollY - lastSpawnScroll > spawnInterval && scrollY < 3000) {
+        lastSpawnScroll = scrollY;
+        createDateDrop(scrollY);
+      }
+    }
+
+    function createDateDrop(scrollY) {
+      const dateEl = document.createElement('div');
+      dateEl.className = 'date-drop';
+      const emoji = dateEmojis[Math.floor(Math.random() * dateEmojis.length)];
+      dateEl.textContent = emoji;
+      // random horizontal position (within scene)
+      const leftPos = 5 + Math.random() * 85; // %
+      dateEl.style.left = leftPos + '%';
+      dateEl.style.fontSize = (1.8 + Math.random() * 1.6) + 'rem';
+      // random rotation
+      dateEl.style.transform = `rotate(${Math.random() * 60 - 30}deg) scale(0.6)`;
+      dateEl.style.opacity = '0.8';
+      // place above
+      const topOffset = -30 - Math.random() * 60;
+      dateEl.style.top = topOffset + '%';
+      
+      dateContainer.appendChild(dateEl);
+
+      // animate fall: using requestAnimationFrame or transition
+      // we'll set a timeout to animate to ground
+      requestAnimationFrame(() => {
+        const groundY = 85 + Math.random() * 10; // % from top
+        const duration = 1200 + Math.random() * 800;
+        dateEl.style.transition = `transform ${duration}ms cubic-bezier(0.3, 1.2, 0.4, 1), opacity ${duration}ms ease`;
+        dateEl.style.transform = `translateY(${groundY}vh) rotate(${Math.random() * 40 - 20}deg) scale(1)`;
+        dateEl.style.opacity = '0.9';
+      });
+
+      // remove after animation ends
+      setTimeout(() => {
+        if (dateEl.parentNode) {
+          dateEl.style.opacity = '0';
+          setTimeout(() => {
+            if (dateEl.parentNode) dateEl.remove();
+          }, 400);
+        }
+      }, 2500 + Math.random() * 1000);
+    }
+
+    // spawn a few dates on load
+    setTimeout(() => {
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => createDateDrop(window.scrollY + i * 30), i * 300);
+      }
+    }, 400);
+
+    // ----- REVEAL ON SCROLL (Intersection Observer) -----
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // manually trigger visible for elements already in view
+    setTimeout(() => {
+      reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('visible');
+        }
+      });
+    }, 200);
+
+  })();
+</script>
+</body>
+</html>
