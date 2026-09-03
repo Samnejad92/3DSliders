@@ -25,6 +25,8 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <!-- Product -->
+    <link rel="stylesheet" href="./assets/css/products.css">
 
     <style>
 
@@ -1118,353 +1120,10 @@
            PRODUCTS
         ========================================================= */
 
-        .products-section {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(255,255,255,.15),
-                    rgba(255,255,255,.4)
-                );
-        }
-
-
-        .products-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3,1fr);
-
-            gap: 22px;
-        }
-
-
-        .product-card {
-
-            min-height: 430px;
-
-            border-radius: 32px;
-
-            padding: 24px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            transition: .45s;
-
-            background:
-                rgba(255,255,255,.48);
-
-            border:
-                1px solid rgba(255,255,255,.85);
-
-            backdrop-filter: blur(20px);
-        }
-
-
-        .product-card:hover {
-
-            transform: translateY(-9px);
-
-            box-shadow:
-                0 30px 70px rgba(45,60,50,.12);
-        }
-
-
-        .product-card-image {
-
-            height: 280px;
-
-            border-radius: 24px;
-
-            display: grid;
-
-            place-items: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #ead9b6,
-                    #ddd5c2 48%,
-                    #c9d0c8
-                );
-
-            overflow: hidden;
-        }
-
-
-        .product-card:nth-child(2)
-        .product-card-image {
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #d9c59b,
-                    #d7d0bd 48%,
-                    #b9c9bc
-                );
-        }
-
-
-        .product-card:nth-child(3)
-        .product-card-image {
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #e4cda8,
-                    #ddd8c8 48%,
-                    #c1cbc2
-                );
-        }
-
-
-        .product-card .date-fruit {
-
-            transform: scale(1.05) rotate(-5deg);
-        }
-
-
-        .product-meta {
-
-            padding-top: 20px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: flex-end;
-        }
-
-
-        .product-name {
-
-            font-family: "Playfair Display", serif;
-
-            font-size: 25px;
-
-            color: var(--green-dark);
-        }
-
-
-        .product-origin {
-
-            font-size: 10px;
-
-            color: var(--muted);
-
-            margin-top: 4px;
-        }
-
-
-        .product-arrow {
-
-            width: 43px;
-            height: 43px;
-
-            border-radius: 50%;
-
-            display: grid;
-
-            place-items: center;
-
-            color: var(--green);
-
-            background: white;
-
-            transition: .3s;
-        }
-
-
-        .product-card:hover .product-arrow {
-
-            background: var(--green);
-
-            color: white;
-
-            transform: rotate(-45deg);
-        }
-
 
         /* =========================================================
            WHY US
         ========================================================= */
-
-        .why-section {
-
-            overflow: hidden;
-        }
-
-
-        .why-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 80px;
-
-            align-items: center;
-        }
-
-
-        .why-visual {
-
-            position: relative;
-
-            min-height: 570px;
-
-            border-radius: 42px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #dce3da,
-                    #ede7d9
-                );
-
-            overflow: hidden;
-        }
-
-
-        .why-circle {
-
-            position: absolute;
-
-            width: 430px;
-            height: 430px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle at 35% 25%,
-                    #e0bc7c,
-                    #7b4930 45%,
-                    #42251b 100%
-                );
-
-            left: 50%;
-            top: 50%;
-
-            transform:
-                translate(-50%,-50%);
-
-            box-shadow:
-                0 50px 100px rgba(62,43,31,.2);
-        }
-
-
-        .why-glass-card {
-
-            position: absolute;
-
-            right: 30px;
-            bottom: 30px;
-
-            padding: 22px;
-
-            border-radius: 22px;
-
-            width: 210px;
-
-            background:
-                rgba(255,255,255,.6);
-
-            backdrop-filter: blur(25px);
-
-            border:
-                1px solid rgba(255,255,255,.85);
-        }
-
-
-        .why-glass-card strong {
-
-            display: block;
-
-            font-family: "Playfair Display", serif;
-
-            font-size: 32px;
-
-            color: var(--green-dark);
-        }
-
-
-        .why-glass-card span {
-
-            font-size: 10px;
-
-            color: var(--muted);
-        }
-
-
-        .feature-list {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 28px;
-
-            margin-top: 35px;
-        }
-
-
-        .feature {
-
-            display: flex;
-
-            gap: 18px;
-        }
-
-
-        .feature-icon {
-
-            flex: 0 0 50px;
-
-            width: 50px;
-            height: 50px;
-
-            border-radius: 17px;
-
-            display: grid;
-
-            place-items: center;
-
-            background:
-                rgba(255,255,255,.65);
-
-            color: var(--green);
-
-            border:
-                1px solid white;
-
-            box-shadow:
-                0 10px 25px rgba(45,60,50,.07);
-        }
-
-
-        .feature h4 {
-
-            font-size: 15px;
-
-            margin-bottom: 5px;
-
-            color: var(--green-dark);
-        }
-
-
-        .feature p {
-
-            font-size: 12px;
-
-            color: var(--muted);
-
-            line-height: 1.7;
-        }
 
 
         /* =========================================================
@@ -1710,240 +1369,9 @@
            BROKERAGE
         ========================================================= */
 
-        .broker-section {
-
-            background:
-                var(--green-dark);
-
-            color: white;
-
-            overflow: hidden;
-        }
-
-
-        .broker-section::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 600px;
-            height: 600px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(207,174,106,.16),
-                    transparent 68%
-                );
-
-            right: -200px;
-            top: -250px;
-        }
-
-
-        .broker-section .section-kicker {
-
-            color: var(--gold-light);
-        }
-
-
-        .broker-section .section-title {
-
-            color: white;
-        }
-
-
-        .broker-section .section-description {
-
-            color: rgba(255,255,255,.55);
-        }
-
-
-        .broker-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4,1fr);
-
-            gap: 15px;
-
-            margin-top: 55px;
-        }
-
-
-        .broker-card {
-
-            padding: 30px 24px;
-
-            min-height: 270px;
-
-            border-radius: 26px;
-
-            background:
-                rgba(255,255,255,.055);
-
-            border:
-                1px solid rgba(255,255,255,.1);
-
-            transition: .4s;
-        }
-
-
-        .broker-card:hover {
-
-            background:
-                rgba(255,255,255,.09);
-
-            transform: translateY(-8px);
-        }
-
-
-        .broker-number {
-
-            color: var(--gold-light);
-
-            font-size: 11px;
-
-            letter-spacing: 2px;
-        }
-
-
-        .broker-icon {
-
-            width: 55px;
-            height: 55px;
-
-            border-radius: 18px;
-
-            display: grid;
-
-            place-items: center;
-
-            margin: 35px 0 25px;
-
-            background:
-                rgba(255,255,255,.08);
-
-            color: var(--gold-light);
-        }
-
-
-        .broker-card h4 {
-
-            font-family: "Playfair Display", serif;
-
-            font-size: 22px;
-
-            margin-bottom: 10px;
-        }
-
-
-        .broker-card p {
-
-            font-size: 11px;
-
-            line-height: 1.8;
-
-            color: rgba(255,255,255,.52);
-        }
-
-
         /* =========================================================
            PROCESS
         ========================================================= */
-
-        .process-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4,1fr);
-
-            gap: 25px;
-
-            position: relative;
-        }
-
-
-        .process-grid::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: 31px;
-
-            left: 12%;
-
-            right: 12%;
-
-            height: 1px;
-
-            background:
-                rgba(56,85,69,.15);
-        }
-
-
-        .process-item {
-
-            position: relative;
-
-            z-index: 2;
-
-            text-align: center;
-        }
-
-
-        .process-circle {
-
-            width: 64px;
-            height: 64px;
-
-            border-radius: 50%;
-
-            display: grid;
-
-            place-items: center;
-
-            margin: auto;
-
-            background:
-                var(--bg);
-
-            border:
-                1px solid rgba(56,85,69,.12);
-
-            color: var(--green);
-
-            box-shadow:
-                0 10px 30px rgba(45,60,50,.08);
-        }
-
-
-        .process-item h4 {
-
-            margin-top: 24px;
-
-            font-family: "Playfair Display", serif;
-
-            font-size: 22px;
-        }
-
-
-        .process-item p {
-
-            margin-top: 8px;
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.7;
-        }
 
 
         /* =========================================================
@@ -3188,242 +2616,708 @@
 
 <section class="products-section" id="products">
 
-    <div class="container">
+    <div class="products-container">
 
+        <div class="products-header">
 
-        <div class="section-head">
+            <div class="products-heading">
 
-            <div>
+                <span class="products-eyebrow">
+                    OUR PRODUCTS
+                </span>
 
-                <div class="section-kicker">
-                    Our Selection
-                </div>
-
-                <h2 class="section-title">
-                    Six expressions<br>
-                    of Iranian dates.
+                <h2>
+                    Premium Dates,
+                    <span>Selected for the World</span>
                 </h2>
 
             </div>
 
-
-            <p class="section-description">
-
-                Carefully sourced from Iran's most renowned
-                growing regions. Every variety has its own
-                character, texture and market.
-
+            <p class="products-intro">
+                Carefully selected Iranian dates,
+                prepared according to international
+                quality standards for global markets.
             </p>
 
         </div>
 
 
+        <div class="products-carousel-wrapper">
 
-        <div class="products-grid">
+            <button
+                class="carousel-btn carousel-prev"
+                type="button"
+                aria-label="Previous products">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </button>
 
 
-            <!-- PRODUCT 1 -->
+            <div class="products-carousel">
 
-            <div class="product-card">
 
-                <div class="product-card-image">
+                <!-- PRODUCT 01 -->
 
-                    <div class="date-fruit large"></div>
+                <article class="product-card">
 
-                </div>
+                    <div class="product-image">
 
-                <div class="product-meta">
+                        <img
+                            src="/images/products/piarom.jpg"
+                            alt="Premium Piarom Dates">
 
-                    <div>
+                        <span class="product-number">
+                            01
+                        </span>
 
-                        <div class="product-name">
+                        <span class="product-badge">
+                            PREMIUM
+                        </span>
+
+                        <div class="product-overlay">
+
+                            <a
+                                href="#"
+                                class="view-product">
+
+                                VIEW PRODUCT
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            PREMIUM DATES
+                        </span>
+
+                        <h3>
                             Piarom
+                        </h3>
+
+                        <p>
+                            Naturally sweet premium dates
+                            with a rich texture and elegant
+                            appearance.
+                        </p>
+
+
+                        <div class="product-specs">
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <div>
+
+                                    <small>
+                                        Origin
+                                    </small>
+
+                                    <strong>
+                                        Iran
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-box"></i>
+
+                                <div>
+
+                                    <small>
+                                        Packing
+                                    </small>
+
+                                    <strong>
+                                        5–10 kg
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="product-origin">
-                            Premium · Semi-dry
+
+                        <div class="product-footer">
+
+                            <div class="moq">
+
+                                <span>
+                                    Minimum Order
+                                </span>
+
+                                <strong>
+                                    1 Ton
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="#quote"
+                                class="quote-btn">
+
+                                REQUEST QUOTE
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
                         </div>
 
                     </div>
 
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
+                </article>
+
+
+                <!-- PRODUCT 02 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="/images/products/mazafati.jpg"
+                            alt="Mazafati Dates">
+
+                        <span class="product-number">
+                            02
+                        </span>
+
+                        <span class="product-badge">
+                            POPULAR
+                        </span>
+
+                        <div class="product-overlay">
+
+                            <a
+                                href="#"
+                                class="view-product">
+
+                                VIEW PRODUCT
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
                     </div>
 
-                </div>
 
-            </div>
+                    <div class="product-content">
 
+                        <span class="product-category">
+                            FRESH DATES
+                        </span>
 
-
-            <!-- PRODUCT 2 -->
-
-            <div class="product-card">
-
-                <div class="product-card-image">
-
-                    <div class="date-fruit"></div>
-
-                </div>
-
-                <div class="product-meta">
-
-                    <div>
-
-                        <div class="product-name">
+                        <h3>
                             Mazafati
+                        </h3>
+
+                        <p>
+                            Soft, dark and naturally sweet
+                            dates with a smooth texture.
+                        </p>
+
+
+                        <div class="product-specs">
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <div>
+
+                                    <small>
+                                        Origin
+                                    </small>
+
+                                    <strong>
+                                        Iran
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-box"></i>
+
+                                <div>
+
+                                    <small>
+                                        Packing
+                                    </small>
+
+                                    <strong>
+                                        5–10 kg
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="product-origin">
-                            Soft · Fresh
+
+                        <div class="product-footer">
+
+                            <div class="moq">
+
+                                <span>
+                                    Minimum Order
+                                </span>
+
+                                <strong>
+                                    1 Ton
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="#quote"
+                                class="quote-btn">
+
+                                REQUEST QUOTE
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
                         </div>
 
                     </div>
 
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
+                </article>
+
+
+                <!-- PRODUCT 03 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="/images/products/sayer.jpg"
+                            alt="Sayer Dates">
+
+                        <span class="product-number">
+                            03
+                        </span>
+
+                        <span class="product-badge">
+                            EXPORT
+                        </span>
+
+                        <div class="product-overlay">
+
+                            <a
+                                href="#"
+                                class="view-product">
+
+                                VIEW PRODUCT
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
                     </div>
 
-                </div>
 
-            </div>
+                    <div class="product-content">
 
+                        <span class="product-category">
+                            EXPORT DATES
+                        </span>
 
-
-            <!-- PRODUCT 3 -->
-
-            <div class="product-card">
-
-                <div class="product-card-image">
-
-                    <div class="date-fruit small"></div>
-
-                </div>
-
-                <div class="product-meta">
-
-                    <div>
-
-                        <div class="product-name">
+                        <h3>
                             Sayer
+                        </h3>
+
+                        <p>
+                            Semi-dry dates with excellent
+                            shelf life and reliable export
+                            performance.
+                        </p>
+
+
+                        <div class="product-specs">
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <div>
+
+                                    <small>
+                                        Origin
+                                    </small>
+
+                                    <strong>
+                                        Iran
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-box"></i>
+
+                                <div>
+
+                                    <small>
+                                        Packing
+                                    </small>
+
+                                    <strong>
+                                        5–10 kg
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="product-origin">
-                            Semi-dry · Export
+
+                        <div class="product-footer">
+
+                            <div class="moq">
+
+                                <span>
+                                    Minimum Order
+                                </span>
+
+                                <strong>
+                                    1 Ton
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="#quote"
+                                class="quote-btn">
+
+                                REQUEST QUOTE
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
                         </div>
 
                     </div>
 
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-
-                </div>
-
-            </div>
+                </article>
 
 
+                <!-- PRODUCT 04 -->
 
-            <!-- PRODUCT 4 -->
+                <article class="product-card">
 
-            <div class="product-card">
+                    <div class="product-image">
 
-                <div class="product-card-image">
+                        <img
+                            src="/images/products/kabkab.jpg"
+                            alt="Kabkab Dates">
 
-                    <div class="date-fruit large"></div>
+                        <span class="product-number">
+                            04
+                        </span>
 
-                </div>
+                        <span class="product-badge">
+                            NATURAL
+                        </span>
 
-                <div class="product-meta">
+                        <div class="product-overlay">
 
-                    <div>
+                            <a
+                                href="#"
+                                class="view-product">
 
-                        <div class="product-name">
-                            Zahedi
+                                VIEW PRODUCT
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
                         </div>
 
-                        <div class="product-origin">
-                            Dry · Golden
-                        </div>
-
                     </div>
 
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
 
-                </div>
+                    <div class="product-content">
 
-            </div>
+                        <span class="product-category">
+                            NATURAL DATES
+                        </span>
 
-
-
-            <!-- PRODUCT 5 -->
-
-            <div class="product-card">
-
-                <div class="product-card-image">
-
-                    <div class="date-fruit"></div>
-
-                </div>
-
-                <div class="product-meta">
-
-                    <div>
-
-                        <div class="product-name">
+                        <h3>
                             Kabkab
+                        </h3>
+
+                        <p>
+                            Rich, soft dates with a distinctive
+                            caramel-like sweetness.
+                        </p>
+
+
+                        <div class="product-specs">
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <div>
+
+                                    <small>
+                                        Origin
+                                    </small>
+
+                                    <strong>
+                                        Iran
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-box"></i>
+
+                                <div>
+
+                                    <small>
+                                        Packing
+                                    </small>
+
+                                    <strong>
+                                        5–10 kg
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="product-origin">
-                            Soft · Natural
+
+                        <div class="product-footer">
+
+                            <div class="moq">
+
+                                <span>
+                                    Minimum Order
+                                </span>
+
+                                <strong>
+                                    1 Ton
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="#quote"
+                                class="quote-btn">
+
+                                REQUEST QUOTE
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
                         </div>
 
                     </div>
 
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
+                </article>
+
+
+                <!-- PRODUCT 05 -->
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="/images/products/zahedi.jpg"
+                            alt="Zahedi Dates">
+
+                        <span class="product-number">
+                            05
+                        </span>
+
+                        <span class="product-badge">
+                            DRY
+                        </span>
+
+                        <div class="product-overlay">
+
+                            <a
+                                href="#"
+                                class="view-product">
+
+                                VIEW PRODUCT
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
                     </div>
 
-                </div>
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            SEMI-DRY DATES
+                        </span>
+
+                        <h3>
+                            Zahedi
+                        </h3>
+
+                        <p>
+                            Firm and naturally sweet dates,
+                            ideal for long-distance export.
+                        </p>
+
+
+                        <div class="product-specs">
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <div>
+
+                                    <small>
+                                        Origin
+                                    </small>
+
+                                    <strong>
+                                        Iran
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="spec-item">
+
+                                <i class="fa-solid fa-box"></i>
+
+                                <div>
+
+                                    <small>
+                                        Packing
+                                    </small>
+
+                                    <strong>
+                                        5–10 kg
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="product-footer">
+
+                            <div class="moq">
+
+                                <span>
+                                    Minimum Order
+                                </span>
+
+                                <strong>
+                                    1 Ton
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="#quote"
+                                class="quote-btn">
+
+                                REQUEST QUOTE
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
 
             </div>
 
 
+            <button
+                class="carousel-btn carousel-next"
+                type="button"
+                aria-label="Next products">
 
-            <!-- PRODUCT 6 -->
+                <i class="fa-solid fa-arrow-right"></i>
 
-            <div class="product-card">
+            </button>
 
-                <div class="product-card-image">
 
-                    <div class="date-fruit small"></div>
+            <div class="carousel-bottom">
 
+                <div class="carousel-progress">
+                    <span></span>
                 </div>
 
-                <div class="product-meta">
+                <div class="carousel-counter">
 
-                    <div>
+                    <span id="currentSlide">
+                        01
+                    </span>
 
-                        <div class="product-name">
-                            Rabbi
-                        </div>
+                    <span>/</span>
 
-                        <div class="product-origin">
-                            Semi-dry · Rich
-                        </div>
-
-                    </div>
-
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
+                    <span id="totalSlides">
+                        05
+                    </span>
 
                 </div>
 
             </div>
-
 
         </div>
 
@@ -3437,136 +3331,6 @@
      WHY US
 ========================================================= -->
 
-<section class="why-section">
-
-    <div class="container">
-
-        <div class="why-grid">
-
-
-            <div class="why-visual">
-
-                <div class="why-circle"></div>
-
-
-                <div class="why-glass-card">
-
-                    <strong>
-                        100%
-                    </strong>
-
-                    <span>
-                        Direct sourcing from
-                        trusted producers
-                    </span>
-
-                </div>
-
-            </div>
-
-
-
-            <div>
-
-                <div class="section-kicker">
-                    Why Armaan
-                </div>
-
-                <h2 class="section-title">
-                    More than a supplier.
-                    A trading partner.
-                </h2>
-
-
-                <div class="feature-list">
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            <i class="fa-solid fa-seedling"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h4>
-                                Direct Sourcing
-                            </h4>
-
-                            <p>
-                                We connect international buyers
-                                directly with carefully selected
-                                Iranian growers and producers.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h4>
-                                Quality Control
-                            </h4>
-
-                            <p>
-                                Product specifications,
-                                grading and packaging are checked
-                                before shipment.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            <i class="fa-solid fa-globe"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h4>
-                                Global Logistics
-                            </h4>
-
-                            <p>
-                                From origin to destination,
-                                we coordinate the commercial
-                                and logistics process.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 
@@ -3811,152 +3575,6 @@
      BROKERAGE
 ========================================================= -->
 
-<section class="broker-section"
-         id="brokerage">
-
-    <div class="container">
-
-
-        <div class="section-head">
-
-            <div>
-
-                <div class="section-kicker">
-                    Trading & Brokerage
-                </div>
-
-                <h2 class="section-title">
-                    We make global
-                    sourcing simple.
-                </h2>
-
-            </div>
-
-
-            <p class="section-description">
-
-                Don't know where to source?
-                Need a specific grade or quantity?
-                Our brokerage service connects your
-                requirements with the right supplier.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="broker-grid">
-
-
-            <div class="broker-card">
-
-                <div class="broker-number">
-                    01
-                </div>
-
-                <div class="broker-icon">
-
-                    <i class="fa-solid fa-comments"></i>
-
-                </div>
-
-                <h4>
-                    Buyer Brief
-                </h4>
-
-                <p>
-                    We understand your target market,
-                    specifications, volume and packaging
-                    requirements.
-                </p>
-
-            </div>
-
-
-
-            <div class="broker-card">
-
-                <div class="broker-number">
-                    02
-                </div>
-
-                <div class="broker-icon">
-
-                    <i class="fa-solid fa-handshake"></i>
-
-                </div>
-
-                <h4>
-                    Supplier Match
-                </h4>
-
-                <p>
-                    We identify suitable producers and
-                    exporters based on your commercial
-                    requirements.
-                </p>
-
-            </div>
-
-
-
-            <div class="broker-card">
-
-                <div class="broker-number">
-                    03
-                </div>
-
-                <div class="broker-icon">
-
-                    <i class="fa-solid fa-scale-balanced"></i>
-
-                </div>
-
-                <h4>
-                    Negotiation
-                </h4>
-
-                <p>
-                    We help coordinate pricing,
-                    specifications, quality requirements
-                    and commercial terms.
-                </p>
-
-            </div>
-
-
-
-            <div class="broker-card">
-
-                <div class="broker-number">
-                    04
-                </div>
-
-                <div class="broker-icon">
-
-                    <i class="fa-solid fa-ship"></i>
-
-                </div>
-
-                <h4>
-                    Shipment
-                </h4>
-
-                <p>
-                    From documentation to logistics,
-                    we help coordinate the transaction
-                    through delivery.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
 
 
 
@@ -3964,121 +3582,6 @@
      PROCESS
 ========================================================= -->
 
-<section id="process">
-
-    <div class="container">
-
-
-        <div class="section-head">
-
-            <div>
-
-                <div class="section-kicker">
-                    Our Process
-                </div>
-
-                <h2 class="section-title">
-                    From harvest<br>
-                    to destination.
-                </h2>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="process-grid">
-
-
-            <div class="process-item">
-
-                <div class="process-circle">
-
-                    <i class="fa-solid fa-seedling"></i>
-
-                </div>
-
-                <h4>
-                    Source
-                </h4>
-
-                <p>
-                    Select trusted growers
-                    and suppliers.
-                </p>
-
-            </div>
-
-
-
-            <div class="process-item">
-
-                <div class="process-circle">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                </div>
-
-                <h4>
-                    Inspect
-                </h4>
-
-                <p>
-                    Check quality, grade,
-                    size and specifications.
-                </p>
-
-            </div>
-
-
-
-            <div class="process-item">
-
-                <div class="process-circle">
-
-                    <i class="fa-solid fa-box-open"></i>
-
-                </div>
-
-                <h4>
-                    Pack
-                </h4>
-
-                <p>
-                    Prepare customized
-                    packaging for destination.
-                </p>
-
-            </div>
-
-
-
-            <div class="process-item">
-
-                <div class="process-circle">
-
-                    <i class="fa-solid fa-ship"></i>
-
-                </div>
-
-                <h4>
-                    Ship
-                </h4>
-
-                <p>
-                    Coordinate logistics
-                    and international delivery.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
 
 
 
@@ -4548,6 +4051,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<script src="./assets/js/products.js"></script>
 
 <script>
 
