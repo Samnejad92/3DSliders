@@ -1,22 +1,106 @@
 // ========================================
-// Get elements
+// GET ELEMENTS
 // ========================================
-const backgrounds =
-    document.querySelectorAll('.background');
-const slider =
-    document.querySelector('.slider-images');
-const images =
-    Array.from(slider.children);
+const backgrounds = document.querySelectorAll('.background');
+const slider = document.querySelector('.slider-images');
+const images = Array.from(slider.children);
 // ========================================
-// Current slide
+// DATE DATA
+// ========================================
+const dateData = [
+    {
+        name: "Zahedi Dates",
+        description:
+            "Premium Iranian Zahedi dates with a naturally sweet flavor and firm texture. Ideal for export and international markets.",
+        origin: "Iran",
+        texture: "Firm",
+        quality: "Premium"
+    },
+    {
+        name: "Sayer Dates",
+        description:
+            "High-quality Iranian Sayer dates with a rich caramel flavor and semi-dry texture. Excellent choice for international trade.",
+        origin: "Iran",
+        texture: "Semi-Dry",
+        quality: "Export"
+    },
+    {
+        name: "Kabkab Dates",
+        description:
+            "Premium Iranian Kabkab dates with a naturally sweet taste and soft texture, carefully selected for international export.",
+        origin: "Iran",
+        texture: "Soft",
+        quality: "Premium"
+    },
+    {
+        name: "Mazafati Dates",
+        description:
+            "Fresh Iranian Mazafati dates with a rich natural sweetness and soft texture. A popular choice for international markets.",
+        origin: "Bam, Iran",
+        texture: "Soft",
+        quality: "Premium"
+    }
+];
+// ========================================
+// CURRENT SLIDE
 // ========================================
 let imageIndex = 0;
 // ========================================
-// Prevent multiple scroll events
+// ANIMATION LOCK
 // ========================================
 let isAnimating = false;
 // ========================================
-// Update Slider
+// UPDATE DATE INFORMATION
+// ========================================
+function updateDateInfo() {
+    const card = document.getElementById("dateInfoCard");
+    if (!card) {
+        console.error("dateInfoCard not found!");
+        return;
+    }
+    const currentDateData = dateData[imageIndex];
+    if (!currentDateData) {
+        console.error("Date data not found for slide:", imageIndex);
+        return;
+    }
+    // ------------------------------------
+    // EXIT ANIMATION
+    // ------------------------------------
+    card.classList.remove("is-entering");
+    card.classList.add("is-changing");
+    // ------------------------------------
+    // CHANGE CONTENT
+    // ------------------------------------
+    setTimeout(() => {
+        document.getElementById("dateName").textContent =
+            currentDateData.name;
+        document.getElementById("dateDescription").textContent =
+            currentDateData.description;
+        document.getElementById("dateOrigin").textContent =
+            currentDateData.origin;
+        document.getElementById("dateTexture").textContent =
+            currentDateData.texture;
+        document.getElementById("dateQuality").textContent =
+            currentDateData.quality;
+        document.getElementById("currentDate").textContent =
+            String(imageIndex + 1).padStart(2, "0");
+        // ------------------------------------
+        // ENTER ANIMATION
+        // ------------------------------------
+        card.classList.remove("is-changing");
+        // Force browser reflow
+        void card.offsetWidth;
+        card.classList.add("is-entering");
+    }, 300);
+    // ------------------------------------
+    // CLEAN ANIMATION CLASS
+    // ------------------------------------
+    setTimeout(() => {
+        card.classList.remove("is-entering");
+    }, 1000);
+}
+// ========================================
+// UPDATE SLIDER
 // ========================================
 function updateSlider() {
     images.forEach(image => {
@@ -28,28 +112,23 @@ function updateSlider() {
         );
     });
     // ------------------------------------
-    // Active
+    // ACTIVE
     // ------------------------------------
-    images[imageIndex]
-        .classList.add('active');
+    images[imageIndex].classList.add('active');
     // ------------------------------------
-    // Previous
+    // PREVIOUS
     // ------------------------------------
     const previousIndex =
-        (imageIndex - 1 + images.length)
-        % images.length;
-    images[previousIndex]
-        .classList.add('previous');
+        (imageIndex - 1 + images.length) % images.length;
+    images[previousIndex].classList.add('previous');
     // ------------------------------------
-    // Next
+    // NEXT
     // ------------------------------------
     const nextIndex =
-        (imageIndex + 1)
-        % images.length;
-    images[nextIndex]
-        .classList.add('next');
+        (imageIndex + 1) % images.length;
+    images[nextIndex].classList.add('next');
     // ------------------------------------
-    // Inactive
+    // INACTIVE
     // ------------------------------------
     images.forEach((image, index) => {
         if (
@@ -61,18 +140,21 @@ function updateSlider() {
         }
     });
     // ------------------------------------
-    // Background
+    // BACKGROUND
     // ------------------------------------
     backgrounds.forEach(background => {
         background.style.opacity = '0';
     });
     if (backgrounds[imageIndex]) {
-        backgrounds[imageIndex]
-            .style.opacity = '1';
+        backgrounds[imageIndex].style.opacity = '1';
     }
+    // ------------------------------------
+    // DATE CARD
+    // ------------------------------------
+    updateDateInfo();
 }
 // ========================================
-// Next Slide
+// NEXT SLIDE
 // ========================================
 function nextSlide() {
     if (isAnimating) return;
@@ -85,26 +167,25 @@ function nextSlide() {
     }, 900);
 }
 // ========================================
-// Previous Slide
+// PREVIOUS SLIDE
 // ========================================
 function previousSlide() {
     if (isAnimating) return;
     isAnimating = true;
     imageIndex =
-        (imageIndex - 1 + images.length)
-        % images.length;
+        (imageIndex - 1 + images.length) % images.length;
     updateSlider();
     setTimeout(() => {
         isAnimating = false;
     }, 900);
 }
 // ========================================
-// Mouse Wheel
+// MOUSE WHEEL
 // ========================================
 window.addEventListener(
     'wheel',
     function (event) {
-        if (event.deltaY > 0) {
+        if (event.deltaX > 0) {
             nextSlide();
         } else {
             previousSlide();
@@ -115,15 +196,15 @@ window.addEventListener(
     }
 );
 // ========================================
-// Touch Swipe
+// TOUCH SWIPE
 // ========================================
-let touchStartY = 0;
-let touchEndY = 0;
+let touchStartX = 0;
+let touchEndX = 0;
 window.addEventListener(
     'touchstart',
     function (event) {
-        touchStartY =
-            event.changedTouches[0].screenY;
+        touchStartX =
+            event.changedTouches[0].screenX;
     },
     {
         passive: true
@@ -132,8 +213,8 @@ window.addEventListener(
 window.addEventListener(
     'touchend',
     function (event) {
-        touchEndY =
-            event.changedTouches[0].screenY;
+        touchEndX =
+            event.changedTouches[0].screenX;
         handleSwipe();
     },
     {
@@ -141,26 +222,22 @@ window.addEventListener(
     }
 );
 // ========================================
-// Handle Swipe
+// HANDLE SWIPE
 // ========================================
 function handleSwipe() {
     const swipeDistance =
-        touchStartY - touchEndY;
-    // Ignore very small movements
+        touchStartX - touchEndX;
     if (Math.abs(swipeDistance) < 50) {
         return;
     }
-    // Swipe up
     if (swipeDistance > 0) {
         nextSlide();
-    }
-    // Swipe down
-    else {
+    } else {
         previousSlide();
     }
 }
 // ========================================
-// Keyboard Support
+// KEYBOARD
 // ========================================
 window.addEventListener(
     'keydown',
@@ -174,6 +251,6 @@ window.addEventListener(
     }
 );
 // ========================================
-// Initial Slider
+// INITIAL SLIDER
 // ========================================
 updateSlider();
