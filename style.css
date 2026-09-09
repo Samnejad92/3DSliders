@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+/* ========================================
+   RESET
+======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+a {
+    text-decoration: none;
+}
+/* ========================================
+   MAIN
+======================================== */
+.slider-main {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #5E2E16;
+}
+/* ========================================
+   BACKGROUNDS
+======================================== */
+.backgrounds {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.background:first-child {
+    opacity: 1;
+}
+/* ========================================
+   CONTAINER
+======================================== */
+.container {
+    position: relative;
+    width: 50%;
+    max-width: 550px;
+    margin-left: max(
+        40px,
+        calc((100vw - 1140px) / 2)
+    );
+    height: 100%;
+    padding: 70px 0;
+    z-index: 10;
+}
+/* ========================================
+   LOGO
+======================================== */
+.logo {
+    position: relative;
+    z-index: 10;
+}
+.logo h1 {
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+.logo h1 span {
+    font-weight: 400;
+}
+/* ========================================
+   CONTENT
+======================================== */
+.slider-content-wrap {
+    height: calc(100% - 80px);
+    display: flex;
+    align-items: center;
+}
+.slider-content {
+    max-width: 500px;
+}
+.product-label {
+    display: inline-block;
+    color: rgba(255,255,255,.7);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+.heading-style-2 {
+    color: #fff;
+    font-size: 65px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 30px;
+}
+.slider-content p {
+    color: rgba(255,255,255,.85);
+    font-size: 17px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+.slider-content h3 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+/* ========================================
+   PRODUCT INFO
+======================================== */
+.product-info {
+    display: flex;
+    gap: 12px;
+}
+.product-info span {
+    color: white;
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,.08);
+}
+/* ========================================
+   SLIDER IMAGES
+======================================== */
+.slider-images {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 58%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+/* ========================================
+   ALL IMAGES
+======================================== */
+.slider-images > img {
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    object-fit: contain;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    filter: blur(25px);
+    transform:
+        translate(-50%, -50%)
+        scale(.35);
+    transition:
+        all 1s cubic-bezier(.22,.61,.36,1);
+}
+/* ========================================
+   ACTIVE
+======================================== */
+.slider-images > img.active {
+    opacity: 1;
+    left: 50%;
+    top: 50%;
+    filter: blur(0);
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+    z-index: 5;
+}
+/* ========================================
+   NEXT
+======================================== */
+.slider-images > img.next {
+    opacity: .65;
+    left: 92%;
+    top: 20%;
+    filter: blur(8px);
+    transform:
+        translate(-50%, -50%)
+        scale(.38);
+    z-index: 3;
+}
+/* ========================================
+   PREVIOUS
+======================================== */
+.slider-images > img.previous {
+    opacity: .65;
+    left: 92%;
+    top: 80%;
+    filter: blur(8px);
+    transform:
+        translate(-50%, -50%)
+        scale(.38);
+    z-index: 3;
+}
+/* ========================================
+   INACTIVE
+======================================== */
+.slider-images > img.inactive {
+    opacity: 0;
+    left: 100%;
+    top: 100%;
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+    filter: blur(30px);
+    z-index: 1;
+}
+/* ========================================
+   SCROLL INDICATOR
+======================================== */
+.scroll-indicator {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255,255,255,.7);
+    font-size: 10px;
+    letter-spacing: 3px;
+    z-index: 20;
+}
+.mouse {
+    width: 22px;
+    height: 34px;
+    border: 2px solid rgba(255,255,255,.7);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+}
+.wheel {
+    width: 3px;
+    height: 7px;
+    background: white;
+    border-radius: 5px;
+    margin-top: 6px;
+    animation: scrollWheel 1.5s infinite;
+}
+@keyframes scrollWheel {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+}
+/* ========================================
+   TABLET
+======================================== */
+@media screen and (max-width: 991px) {
+    .container {
+        width: 48%;
+        margin-left: 40px;
+    }
+    .heading-style-2 {
+        font-size: 48px;
+    }
+    .slider-images {
+        width: 60%;
+    }
+    .slider-images > img {
+        width: 500px;
+        height: 500px;
+    }
+}
+/* ========================================
+   MOBILE
+======================================== */
+@media screen and (max-width: 767px) {
+    body {
+        overflow: hidden;
+    }
+    .slider-main {
+        height: 100svh;
+        min-height: 700px;
+        flex-direction: column;
+    }
+    .container {
+        width: 100%;
+        height: 50%;
+        margin: 0;
+        padding: 35px 25px 0;
+    }
+    .slider-content-wrap {
+        height: calc(100% - 50px);
+        align-items: center;
+    }
+    .slider-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    .product-label {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+    }
+    .heading-style-2 {
+        font-size: 38px;
+        margin-bottom: 18px;
+    }
+    .slider-content p {
+        font-size: 14px;
+        line-height: 23px;
+        margin: auto auto 20px;
+        max-width: 430px;
+    }
+    .slider-content h3 {
+        font-size: 22px;
+    }
+    .product-info {
+        justify-content: center;
+    }
+    .slider-images {
+        width: 100%;
+        height: 50%;
+        top: 50%;
+        right: 0;
+    }
+    .slider-images > img {
+        width: 390px;
+        height: 390px;
+    }
+    .slider-images > img.active {
+        left: 50%;
+        top: 50%;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+    .slider-images > img.next {
+        left: 100%;
+        top: 15%;
+        transform:
+            translate(-50%, -50%)
+            scale(.3);
+    }
+    .slider-images > img.previous {
+        left: 100%;
+        top: 85%;
+        transform:
+            translate(-50%, -50%)
+            scale(.3);
+    }
+    .scroll-indicator {
+        display: none;
+    }
+}
+/* ========================================
+   SMALL MOBILE
+======================================== */
+@media screen and (max-width: 575px) {
+    .container {
+        padding: 25px 20px 0;
+    }
+    .logo h1 {
+        font-size: 22px;
+    }
+    .heading-style-2 {
+        font-size: 32px;
+    }
+    .slider-content p {
+        font-size: 13px;
+        line-height: 21px;
+    }
+    .slider-images > img {
+        width: 320px;
+        height: 320px;
+    }
+    .product-info span {
+        padding: 8px 12px;
+    }
+}
