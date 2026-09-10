@@ -91,13 +91,13 @@ function updateDateInfo() {
         // Force browser reflow
         void card.offsetWidth;
         card.classList.add("is-entering");
-    }, 300);
+    }, 600);
     // ------------------------------------
     // CLEAN ANIMATION CLASS
     // ------------------------------------
     setTimeout(() => {
         card.classList.remove("is-entering");
-    }, 1000);
+    }, 2000);
 }
 // ========================================
 // UPDATE SLIDER

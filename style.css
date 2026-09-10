@@ -596,28 +596,28 @@ a {
 .date-number {
     transition:
         opacity .35s ease,
-        transform .35s cubic-bezier(.22,.61,.36,1);
+        transform 1.05s cubic-bezier(.22,.61,.36,1);
 }
 /* Text leaving */
 .date-info-card.is-changing .date-info-content {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(-60px);
 }
 .date-info-card.is-changing .date-number {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(-60px);
 }
 /* Text entering */
 .date-info-card.is-entering .date-info-content {
-    animation: dateTextIn .65s cubic-bezier(.22,.61,.36,1) forwards;
+    animation: dateTextIn 1.65s cubic-bezier(.22,.61,.36,1) forwards;
 }
 .date-info-card.is-entering .date-number {
-    animation: dateNumberIn .55s cubic-bezier(.22,.61,.36,1) forwards;
+    animation: dateNumberIn 1.55s cubic-bezier(.22,.61,.36,1) forwards;
 }
 @keyframes dateTextIn {
     0% {
         opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(88px);
     }
     100% {
         opacity: 1;
@@ -627,7 +627,7 @@ a {
 @keyframes dateNumberIn {
     0% {
         opacity: 0;
-        transform: translateY(15px) scale(.9);
+        transform: translateY(60px) scale(.9);
     }
     100% {
         opacity: 1;
