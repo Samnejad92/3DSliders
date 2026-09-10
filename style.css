@@ -169,7 +169,7 @@ a {
         translate(-50%, -50%)
         scale(.35);
     transition:
-        all 1s cubic-bezier(.22,.61,.36,1);
+        all 2s cubic-bezier(.22,.61,.36,1);
 }
 /* ========================================
    ACTIVE
@@ -189,12 +189,12 @@ a {
 ======================================== */
 .slider-images > img.next {
     opacity: .65;
-    left: 92%;
+    left: 80%;
     top: 20%;
-    filter: blur(8px);
+    filter: blur(2px);
     transform:
         translate(-50%, -50%)
-        scale(.38);
+        scale(.57);
     z-index: 3;
 }
 /* ========================================
@@ -204,10 +204,10 @@ a {
     opacity: .65;
     left: 20%;
     top: 20%;
-    filter: blur(8px);
+    filter: blur(2px);
     transform:
         translate(-50%, -50%)
-        scale(.38);
+        scale(.57);
     z-index: 3;
 }
 /* ========================================
@@ -353,18 +353,18 @@ a {
             scale(1);
     }
     .slider-images > img.next {
-        left: 100%;
+        left: 85%;
         top: 15%;
         transform:
             translate(-50%, -50%)
-            scale(.3);
+            scale(.57);
     }
     .slider-images > img.previous {
-        left: 0%;
+        left: 15%;
         top: 15%;
         transform:
             translate(-50%, -50%)
-            scale(.3);
+            scale(.57);
     }
     .scroll-indicator {
         display: none;
@@ -404,7 +404,7 @@ a {
     bottom: 45px;
     transform: translateX(-50%);
     width: min(700px, 90%);
-    min-height: 190px;
+    min-height: 280px;
     padding: 28px 32px;
     z-index: 20;
     display: flex;
@@ -529,10 +529,10 @@ a {
     .date-info-card {
         width: calc(100% - 30px);
         bottom: 20px;
-        min-height: auto;
+        min-height: 250px;
         padding: 20px;
         border-radius: 20px;
-        align-items: flex-end;
+        /* align-items: flex-end; */
     }
     .date-info-content {
         max-width: calc(100% - 55px);

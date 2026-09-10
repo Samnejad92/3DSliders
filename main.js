@@ -242,10 +242,10 @@ function handleSwipe() {
 window.addEventListener(
     'keydown',
     function (event) {
-        if (event.key === 'ArrowDown') {
+        if (event.key === 'ArrowRight') {
             nextSlide();
         }
-        if (event.key === 'ArrowUp') {
+        if (event.key === 'ArrowLeft') {
             previousSlide();
         }
     }
